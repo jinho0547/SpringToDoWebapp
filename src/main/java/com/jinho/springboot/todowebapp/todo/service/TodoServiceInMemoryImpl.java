@@ -1,14 +1,15 @@
-package com.jinho.springboot.todowebapp.todo;
+package com.jinho.springboot.todowebapp.todo.service;
 
+import com.jinho.springboot.todowebapp.todo.entity.Todo;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
-@Service
-public class TodoService {
+public class TodoServiceInMemoryImpl implements TodoService {
     private static List<Todo> todos = new ArrayList<>();
     private static int todosCount = 0;
     static {
@@ -24,13 +25,15 @@ public class TodoService {
         return todos.stream().filter(todo -> todo.getUsername().equals(username)).toList();
     }
 
-    public Todo findById(int id) {
+    public Optional<Todo> findById(int id) {
         Predicate<? super Todo> predicate = todo -> todo.getId() == id;
-        return todos.stream().filter(predicate).findFirst().orElse(null);
+        Todo todo = todos.stream().filter(predicate).findFirst().orElse(null);
+        return Optional.ofNullable(todo);
     }
 
-    public void addTodo(String username, String description, LocalDate targetDate, boolean done) {
-        todos.add(new Todo(++todosCount, username, description, targetDate, done));
+    public void addTodo(Todo todo) {
+        todo.setId(++todosCount);
+        todos.add(todo);
     }
 
     public void deleteById(int id) {

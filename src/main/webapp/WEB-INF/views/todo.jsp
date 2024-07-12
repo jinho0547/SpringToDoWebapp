@@ -3,7 +3,7 @@
 <div class="container">
     <h1>Enter Todo Details</h1>
 
-    <%--@elvariable id="todo" type="com.jinho.springboot.todowebapp.todo.Todo"--%>
+    <%--@elvariable id="todo" type="com.jinho.springboot.todowebapp.todo.entity.Todo"--%>
     <form:form method="post" modelAttribute="todo">
 
         <fieldset class="mb-3">

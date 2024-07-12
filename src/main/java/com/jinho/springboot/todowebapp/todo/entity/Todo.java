@@ -1,16 +1,14 @@
-package com.jinho.springboot.todowebapp.todo;
+package com.jinho.springboot.todowebapp.todo.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
+@Entity
 public class Todo {
-    private int id;
-    private String username;
-    @Size(min = 10, message = "최소한 10글자를 입력하세요")
-    private String description;
-    private LocalDate targetDate;
-    private boolean done;
 
     public Todo() {}
 
@@ -21,6 +19,16 @@ public class Todo {
         this.targetDate = targetDate;
         this.done = done;
     }
+
+    @Id
+    @GeneratedValue
+    private int id;
+    private String username;
+    @Size(min = 10, message = "최소한 10글자를 입력하세요")
+    private String description;
+    private LocalDate targetDate;
+    private boolean done;
+
 
     public int getId() {
         return id;
